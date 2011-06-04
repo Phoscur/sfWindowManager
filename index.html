@@ -3,9 +3,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>New Web Project</title>
+        <script type="text/javascript" src="lib/jquery-1.6.1.js"></script>
+        <script type="text/javascript" src="src/sf.js"></script>
+        <script type="text/javascript" src="src/windowManager.js"></script>
+        <script type="text/javascript" src="src/Actions.js"></script>
+        <script type="text/javascript" src="src/Views.js"></script>
+        <title>sfWindowManager</title>
+        <script type="text/javascript">
+            $(function() {
+                $("a").click(function(domnode) {
+                    $("#log").append($(this).attr("href"));
+                    return false;
+                })
+            });
+        </script>
     </head>
     <body>
-        <h1>New Web Project Page</h1>
+        <h1>sfWindowManager</h1>
+        <a href="/some/controller">Link zu einem Controller</a>
+        <div id="log"></div>
     </body>
 </html>
