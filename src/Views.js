@@ -1,7 +1,19 @@
 
 
-
+/**
+ * Interface for Views
+ */
 function View () {
+    
+}
+
+View.prototype.setContent = function() {
+    
+};
+/**
+ * Factory method
+ */
+View.create = function() {
     
 }
 
