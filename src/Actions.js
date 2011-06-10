@@ -1,5 +1,9 @@
 
-function Action () {
+
+// require jQuery
+
+
+function Action() {
     
 }
 
@@ -12,13 +16,36 @@ Action.prototype.asEventhandler = function() {
     }
 }
 
-function CallControllerAction () {
-    
+function CallControllerAction(target, data) {
+    this.setTarget = function(newTarget) {
+        target = newTarget;
+        return this;
+    };
+    this.getTarget = function() {
+        if (!target) {
+            throw new Error("Target not specified");
+        }
+        return target;
+    };
+    this.setData = function(newData) {
+        data = newData;
+        return this;
+    };
+    this.getData = function() {
+        return data;
+    };
 }
+SF.inherit(CallControllerAction, Action);
 
-CallControllerAction.prototype.asEventhandler = function() {
+CallControllerAction.prototype.execute = function() {
+    SF.manager.requestFromServer(this.getTarget(), this.getData());
+};
+
+CallControllerAction.prototype.asEventhandler = function(before) {
+    var that = this; // save context
     return function() {
-        var href = $(this).attr("href");
-        
+        before && before(that, this);
+        //var href = $(this).attr("href");
+        that.execute();
     }
 }

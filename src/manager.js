@@ -1,7 +1,7 @@
 
 SF.manager = (function() {
-    var views = {}
-    ,   ajax  = function() {};
+    var views = {} // id: View
+    ,   ajax  = function(target, data, callback) {};
 
     function getView (id, type, args) {
         var view = views[id];
