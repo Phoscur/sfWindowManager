@@ -8,14 +8,27 @@ function Action() {
 }
 
 /**
- * @return {function} Eventlistener to bind via jQuery to a DOM-Node
+ * Convert the action to a Eventhandler function
+ * @param {function} before(action, node) function to execute before the action is executed
+ * @return {function} Eventhandler to bind to a DOM-Node
+ * 
+ * Example – fetches the target controller from the node's href attribute:
+ * $("#myLink").click(aCallControllerAction.asEventhandler(function(action, node) {
+ *     action.setTarget($(node).attr("href"));
+ * }));
  */
-Action.prototype.asEventhandler = function() {
+Action.prototype.asEventhandler = function(before) {
+    var that = this; // save context
     return function() {
-        $(this) // this is the domNode
+        before && before(that, this);
+        that.execute();
     }
 }
 
+/**
+ * Simple Action, which uses the manager to call a serverside controller
+ * The target controller and additional data can be set via constructor or setter
+ */
 function CallControllerAction(target, data) {
     this.setTarget = function(newTarget) {
         target = newTarget;
@@ -41,11 +54,3 @@ CallControllerAction.prototype.execute = function() {
     SF.manager.requestFromServer(this.getTarget(), this.getData());
 };
 
-CallControllerAction.prototype.asEventhandler = function(before) {
-    var that = this; // save context
-    return function() {
-        before && before(that, this);
-        //var href = $(this).attr("href");
-        that.execute();
-    }
-}
