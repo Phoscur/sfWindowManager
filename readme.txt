@@ -9,7 +9,7 @@ Actions (Controller) werden nach Typ gebaut (mit Argumenten) und durch CSS Selek
 Format der Serverantwort (JSON):
 
 [
-{ // immer noch unfertig:
+{
     view: {
         id: "overview",
         type: "phWindow",
@@ -37,13 +37,6 @@ Format der Serverantwort (JSON):
             event: "load",
             args: [5000, "nameOfRefreshingController"]
     },
-    content: {
-        template: "overview",
-        data: {
-            title: "Überblick",
-            p: "Lorem Ipsum...",
-            placeholder: "<div>some plain HTML</div>"
-        }
-    }
+    content: "<div>some plain HTML</div>"
 }
 ]
