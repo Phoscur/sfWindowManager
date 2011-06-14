@@ -1,7 +1,5 @@
 
 
-// require jQuery
-
 
 function Action() {
     
@@ -20,10 +18,11 @@ function Action() {
 Action.prototype.asEventhandler = function(before) {
     var that = this; // save context
     return function() {
+        console.log(that);
         before && before(that, this);
         that.execute();
         return false;
-    }
+    };
 }
 
 /**
@@ -31,6 +30,7 @@ Action.prototype.asEventhandler = function(before) {
  * The target controller and additional data can be set via constructor or setter
  */
 function CallControllerAction(target, data) {
+    Action.call(this);
     this.setTarget = function(newTarget) {
         target = newTarget;
         return this;

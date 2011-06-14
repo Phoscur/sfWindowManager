@@ -12,11 +12,11 @@
         <script type="text/javascript">
             
             $(function() {
-            	SF.manager.init({ajax: function () {
-			         return [{
+            	SF.manager.init({ajax: function (mock, it, cb) {
+			         cb([{
 			             "view":{
                              "id":"content",
-                             "type":"sfDiv", //einfacher div
+                             "type":"sfDIV", //einfacher div
                              "args":[]
                           },
                           "messages":[
@@ -33,7 +33,7 @@
                           ],
                           "content":
                               "<div><h1>Willkommen auf unserer Seite!<\/h1>some plain HTML<\/span><\/div>"
-			         }];
+			         }]);
 			    }});
 			    $("#someController").click((new CallControllerAction()).asEventhandler(function(action, node) {
                     action.setTarget($(node).attr("href"));
@@ -58,7 +58,7 @@
     </head>
     <body>
         <h1>sfWindowManager</h1>
-        <a id="someController" href="/some/controller">Link zu einem Controller</a>
+        <a id="someController" href="#/some/controller">Link zu einem Controller</a>
         <div id="views"></div>
         <div id="log"></div>
     </body>
