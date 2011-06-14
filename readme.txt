@@ -7,21 +7,21 @@ View wird gesucht und bei Bedarf gebaut (mit Argumenten), mit Inhalt befüllt
 Actions (Controller) werden nach Typ gebaut (mit Argumenten) und durch CSS Selektoren angebunden
 
 Format der Serverantwort (JSON):
-
+// args always optional
 [
 {
-    view: {
+    view: { // required
         id: "overview",
         type: "phWindow",
         args: []
     },
-    messages : [
+    messages: [ // optional
         {
             type: "info",
             text: "Seite aktualisiert"
         }
     ],
-    actions: {
+    actions: { // optional
         "CSS3 Selector": {
             type: "SimpleAction",
             event: "click",
@@ -37,6 +37,6 @@ Format der Serverantwort (JSON):
             event: "load",
             args: [5000, "nameOfRefreshingController"]
     },
-    content: "<div>some plain HTML</div>"
+    content: "<div>some plain HTML</div>" // optional
 }
 ]

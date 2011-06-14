@@ -16,24 +16,42 @@
 			         cb([{
 			             "view":{
                              "id":"content",
-                             "type":"sfDIV", //einfacher div
+                             "type":"SfDiv",
                              "args":[]
                           },
                           "messages":[
                              {
                                 "type":"info",
                                 "text":"Login erfolgreich",
-                                "target":"global" //wo soll die Nachricht erscheinen
                              },
                              {
                                 "type":"warning",
                                 "text":"Bitte schalten sie Cookies an",
-                                "target":"content"
                              }
                           ],
                           "content":
                               "<div><h1>Willkommen auf unserer Seite!<\/h1>some plain HTML<\/span><\/div>"
-			         }]);
+			         },
+			         {
+                          "view":{
+                             "id":"imageshow",
+                             "type":"SfWindow",
+                             "args":{
+                                "features":[ //Eine liste mit widgets
+                                   "scrollbar",
+                                   "tabs"
+                                ]
+                             }
+                          },
+                          "messages":[
+                    
+                          ],
+                          "actions":[
+                    
+                          ],
+                          "content": "hier fehlt html code für images"
+                       }
+			         ]);
 			    }});
 			    $("#someController").click((new CallControllerAction()).asEventhandler(function(action, node) {
                     action.setTarget($(node).attr("href"));

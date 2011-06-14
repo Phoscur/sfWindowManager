@@ -6,7 +6,7 @@ function Action() {
 }
 
 /**
- * Convert the action to a Eventhandler function
+ * Convert the action to an Eventhandler-function
  * @param {function} before(action, node) function to execute before the action is executed
  * @return {function} Eventhandler to bind to a DOM-Node
  * 
@@ -18,7 +18,6 @@ function Action() {
 Action.prototype.asEventhandler = function(before) {
     var that = this; // save context
     return function() {
-        console.log(that);
         before && before(that, this);
         that.execute();
         return false;
