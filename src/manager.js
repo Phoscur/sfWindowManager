@@ -5,8 +5,8 @@ SF.manager = (function() {
 
     function getView (id, type, args) {
         var view = views[id];
-        if (!view || !(view instanceof type)) {
-            view = views[id] = SF.views[type].create.apply(null, args);
+        if (!view/* || !(view instanceof type)*/) {
+            view = views[id] = SF.views[type].create();
         }
         return view;
     }
@@ -26,8 +26,8 @@ SF.manager = (function() {
         handleServerResponse: function(responseArray) {
             responseArray.forEach( function(response) {
                 // TODO handle messages
-                var view = getView(response.view.id, response.view.type, response.view.args)
-
+                var view = getView(response.view.id, response.view.type, response.view.args);
+                view.setContent(response.content);
             });
         }
     };

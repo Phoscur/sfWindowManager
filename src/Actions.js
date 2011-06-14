@@ -22,6 +22,7 @@ Action.prototype.asEventhandler = function(before) {
     return function() {
         before && before(that, this);
         that.execute();
+        return false;
     }
 }
 

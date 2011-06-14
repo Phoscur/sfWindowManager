@@ -5,13 +5,43 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <script type="text/javascript" src="lib/jquery-1.6.1.js"></script>
         <script type="text/javascript" src="src/sf.js"></script>
-        <script type="text/javascript" src="src/windowManager.js"></script>
+        <script type="text/javascript" src="src/manager.js"></script>
         <script type="text/javascript" src="src/Actions.js"></script>
         <script type="text/javascript" src="src/Views.js"></script>
         <title>sfWindowManager</title>
         <script type="text/javascript">
+            
             $(function() {
-                $("a").click(function(domnode) {
+            	SF.manager.init({ajax: function () {
+			         return [{
+			             "view":{
+                             "id":"content",
+                             "type":"sfDiv", //einfacher div
+                             "args":[]
+                          },
+                          "messages":[
+                             {
+                                "type":"info",
+                                "text":"Login erfolgreich",
+                                "target":"global" //wo soll die Nachricht erscheinen
+                             },
+                             {
+                                "type":"warning",
+                                "text":"Bitte schalten sie Cookies an",
+                                "target":"content"
+                             }
+                          ],
+                          "content":
+                              "<div><h1>Willkommen auf unserer Seite!<\/h1>some plain HTML<\/span><\/div>"
+			         }];
+			    }});
+			    $("#someController").click((new CallControllerAction()).asEventhandler(function(action, node) {
+                    action.setTarget($(node).attr("href"));
+                }));
+			    
+			 
+            	
+                /*$("a").click(function(domnode) {
                     $("#log").append($(this).attr("href"));
                     return false;
                 })
@@ -22,13 +52,14 @@
                 A.c = function() {
                     return this.prototype.b;
                 };
-                $("#log").append(A.c())
+                $("#log").append(A.c())*/
             });
         </script>
     </head>
     <body>
         <h1>sfWindowManager</h1>
-        <a href="/some/controller">Link zu einem Controller</a>
+        <a id="someController" href="/some/controller">Link zu einem Controller</a>
+        <div id="views"></div>
         <div id="log"></div>
     </body>
 </html>

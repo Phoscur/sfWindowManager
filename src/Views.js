@@ -1,5 +1,7 @@
 
 
+const VIEWS_NODE_ID = 'views';
+
 /**
  * Interface for Views
  */
@@ -18,7 +20,7 @@ View.prototype.setContent = function(html) {
  */
 View.create = function(node, constructor) {
     // 'this' is the class 'View' in this context
-    node = node || this.prototype.getHTMLNodePrototype().clone();
+    node = node || this.prototype.getHTMLNodePrototype().clone().appendTo('#'+VIEWS_NODE_ID);
     constructor = constructor || this;
     return new constructor(node);
 };
@@ -27,8 +29,8 @@ View.create = function(node, constructor) {
  */
 View.prototype.getHTMLNodePrototype = function() {};
 
-function sfDIV() {
-    
+function sfDIV(node) {
+    View.call(this, node);
 }
 
 SF.inherit(sfDIV, View);
@@ -41,12 +43,12 @@ sfDIV.prototype.getHTMLNodePrototype = function() {
     return sfDIVNodePrototype;
 }
 
-sfDIV.create = function() {
-    
-}
+sfDIV.create = View.create;
 
 function sfWindow() {
     
 }
 
-SF.views
+SF.views = {
+    sfDIV: sfDIV
+};
